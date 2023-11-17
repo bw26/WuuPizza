@@ -52,9 +52,6 @@ public class Customer {
     public String getState(){return this.state;}
     public String getCity(){return this.city;}
 
-    public void setPhone_number(Long phone_number) {
-        this.phone_number = phone_number;
-    }
 
     public void setStreet_address(String street_address) {
         this.street_address = street_address;

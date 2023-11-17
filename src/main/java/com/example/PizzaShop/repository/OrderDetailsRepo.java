@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface OrderDetailsRepo extends CrudRepository<OrderDetails,Long> {
-    @Query(value = "SELECT * FROM ORDER_DETAILS WHERE ORDER_ID = ?", nativeQuery = true)
+    @Query(value = "SELECT * FROM ORDERDETAILS WHERE ORDER_ID = ?", nativeQuery = true)
     OrderDetails findOrderDetailsByID(Long id);
 
-    @Query(value = "SELECT * FROM ORDER_DETAILS",nativeQuery = true)
+    @Query(value = "SELECT * FROM ORDERDETAILS",nativeQuery = true)
     List<OrderDetails> findAll();
 }

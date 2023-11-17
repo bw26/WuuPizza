@@ -29,6 +29,10 @@ public class CustomerOrderController {
     public CustomerOrder findCustomerOrderById(@PathVariable Long id){
         return customerOrderRepo.findCustomerOrderById(id);
     }
+    @GetMapping("/orders/{order_id}/products")
+    public List<Product> findOrderProducts(@PathVariable Long order_id){
+        return customerOrderRepo.findCustomerOrderById(order_id).getProducts();
+    }
 
     @Transactional
     @PostMapping("/orders")

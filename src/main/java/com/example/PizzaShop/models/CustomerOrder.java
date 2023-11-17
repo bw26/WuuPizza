@@ -1,6 +1,7 @@
 package com.example.PizzaShop.models;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 
 import java.sql.Time;
 import java.sql.Date;
@@ -25,6 +26,9 @@ public class CustomerOrder {
     Time time;
     @Column(name = "STATUS")
     private int status;
+
+    @OneToOne(mappedBy = "customerOrder")
+    private OrderDetails orderDetails;
 
     @ManyToMany
     @JoinTable(
@@ -57,6 +61,10 @@ public class CustomerOrder {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
     }
 
     public void setPhone_number(Long phone_number) {

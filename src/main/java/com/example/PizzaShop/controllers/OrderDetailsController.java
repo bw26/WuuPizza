@@ -24,7 +24,7 @@ public class OrderDetailsController {
         return orderDetailsRepo.findAll();
     }
 
-    @GetMapping("/orders/details/{id}")
+    @GetMapping("/orders/{id}/details")
     public OrderDetails findOrderDetailsById(@PathVariable Long id){
         return orderDetailsRepo.findOrderDetailsByID(id);
     }

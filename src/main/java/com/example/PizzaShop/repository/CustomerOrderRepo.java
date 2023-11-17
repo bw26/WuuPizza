@@ -21,7 +21,7 @@ public interface CustomerOrderRepo extends CrudRepository<CustomerOrder,Long> {
 
     @Query(value = "SELECT * FROM CUSTOMERORDER",nativeQuery = true)
     List<CustomerOrder> findAll();
-    @Query(value = "select ZEROIFNULL(MAX(ORDER_ID)) FROM CUSTOMERORDER", nativeQuery = true)
+    @Query(value = "SELECT ZEROIFNULL(MAX(ORDER_ID)) FROM CUSTOMERORDER", nativeQuery = true)
     int getLargestID();
 
     @Modifying

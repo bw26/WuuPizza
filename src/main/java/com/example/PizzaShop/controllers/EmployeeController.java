@@ -17,7 +17,6 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
-@RolesAllowed(value = "ACCOUNTADMIN")
 public class EmployeeController {
     @Autowired
     private EmployeeRepo employeeRepo;

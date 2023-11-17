@@ -10,8 +10,8 @@ public class OrderDetails {
     @Column(name = "ORDER_ID")
     @Id
     private int order_id;
-    @OneToOne
-    @JoinColumn(referencedColumnName = "order_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "ORDER_ID")
     private CustomerOrder customerOrder;
 
     public OrderDetails(){super();}
