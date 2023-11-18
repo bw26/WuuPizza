@@ -14,13 +14,35 @@ public class OrderDetails {
     @JoinColumn(name = "order_id", referencedColumnName = "ORDER_ID")
     private CustomerOrder customerOrder;
 
-    public OrderDetails(){super();}
-    public OrderDetails(double price_charged, int order_id){
-        this.price_charged=price_charged;
-        this.order_id=order_id;
+    public OrderDetails() {
+        super();
     }
 
-    public double getPrice_charged() {return this.price_charged;}
+    public OrderDetails(double price_charged, int order_id, CustomerOrder customerOrder) {
+        this.price_charged = price_charged;
+        this.order_id = order_id;
+        this.customerOrder = customerOrder;
+    }
 
-    public int getOrder_id() {return this.order_id;}
+    //Getter
+    public double getPrice_charged() {
+        return this.price_charged;
+    }
+
+    public int getOrder_id() {
+        return this.order_id;
+    }
+
+    //Setter
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
+    public void setCustomerOrder(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
+    }
+
+    public void setPrice_charged(double price_charged) {
+        this.price_charged = price_charged;
+    }
 }

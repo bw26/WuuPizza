@@ -1,9 +1,7 @@
 package com.example.PizzaShop.controllers;
 
 import com.example.PizzaShop.models.OrderDetails;
-import com.example.PizzaShop.models.OrderItems;
 import com.example.PizzaShop.repository.OrderDetailsRepo;
-import com.example.PizzaShop.repository.OrderItemsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +18,12 @@ public class OrderDetailsController {
     private OrderDetailsRepo orderDetailsRepo;
 
     @GetMapping("/orders/details")
-    public List<OrderDetails> findAll(){
+    public List<OrderDetails> findAll() {
         return orderDetailsRepo.findAll();
     }
 
     @GetMapping("/orders/{id}/details")
-    public OrderDetails findOrderDetailsById(@PathVariable Long id){
+    public OrderDetails findOrderDetailsById(@PathVariable Long id) {
         return orderDetailsRepo.findOrderDetailsByID(id);
     }
 }

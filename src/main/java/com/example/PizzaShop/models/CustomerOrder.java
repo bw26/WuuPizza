@@ -1,10 +1,9 @@
 package com.example.PizzaShop.models;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.Order;
 
-import java.sql.Time;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -12,7 +11,6 @@ import java.util.List;
 public class CustomerOrder {
     @Column(name = "ORDER_ID")
     @Id
-    @GeneratedValue
     private int order_id;
     @Column(name = "EMPLOYEE_ID")
     private int employee_id;
@@ -20,53 +18,68 @@ public class CustomerOrder {
     private Long phone_number;
     @Column(name = "DATE")
     @Temporal(TemporalType.DATE)
-    Date date;
+    Date date = new Date(System.currentTimeMillis());
     @Column(name = "TIME")
     @Temporal(TemporalType.TIME)
-    Time time;
+    Time time = new Time(this.date.getTime());
     @Column(name = "STATUS")
     private int status;
 
     @OneToOne(mappedBy = "customerOrder")
     private OrderDetails orderDetails;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ORDER_ITEMS",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> products;
+    @OneToMany(mappedBy = "customerOrder")
+    private List<OrderItems> orderItems;
 
-    public CustomerOrder(){}
-    public CustomerOrder(int order_id,int employee_id,Long phone_number,Date date,Time time,int status){
-        this.order_id=order_id;
-        this.employee_id=employee_id;
-        this.phone_number=phone_number;
-        this.date=date;
-        this.time=time;
-        this.status=status;
+    public CustomerOrder() {
+        super();
     }
 
-    public int getOrder_id() {return this.order_id;}
+    public CustomerOrder(int order_id, int employee_id, Long phone_number, Date date, Time time, int status, OrderDetails orderDetails, List<OrderItems> orderItems) {
+        this.order_id = order_id;
+        this.employee_id = employee_id;
+        this.phone_number = phone_number;
+        this.date = date;
+        this.time = time;
+        this.status = status;
+        this.orderDetails = orderDetails;
+        this.orderItems = orderItems;
+    }
 
-    public int getEmployee_id() {return this.employee_id;}
+    //Getter
+    public int getOrder_id() {
+        return this.order_id;
+    }
 
-    public Long getPhone_number() {return this.phone_number;}
+    public int getEmployee_id() {
+        return this.employee_id;
+    }
 
-    public Date getDate() {return this.date;}
+    public Long getPhone_number() {
+        return this.phone_number;
+    }
 
-    public Time getTime() {return this.time;}
+    public Date getDate() {
+        return this.date;
+    }
 
-    public int getStatus() {return this.status;}
+    public Time getTime() {
+        return this.time;
+    }
 
-    public List<Product> getProducts() {
-        return products;
+    public int getStatus() {
+        return this.status;
+    }
+
+    public List<OrderItems> getOrderItems() {
+        return orderItems;
     }
 
     public OrderDetails getOrderDetails() {
         return orderDetails;
     }
 
+    //Setter
     public void setPhone_number(Long phone_number) {
         this.phone_number = phone_number;
     }
@@ -85,5 +98,17 @@ public class CustomerOrder {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public void setOrderItems(List<OrderItems> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

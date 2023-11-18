@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EmployeeRepo extends CrudRepository<Employee,Long> {
+public interface EmployeeRepo extends CrudRepository<Employee, Long> {
     @Query(value = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID = ?", nativeQuery = true)
     Employee findEmployeeByID(Long id);
 
-    @Query(value = "SELECT * FROM EMPLOYEE",nativeQuery = true)
+    @Query(value = "SELECT * FROM EMPLOYEE", nativeQuery = true)
     List<Employee> findAll();
 
     @Query(value = "select ZEROIFNULL(MAX(EMPLOYEE_ID)) FROM EMPLOYEE", nativeQuery = true)

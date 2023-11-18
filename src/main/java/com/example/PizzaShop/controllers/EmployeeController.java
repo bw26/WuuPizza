@@ -1,14 +1,9 @@
 package com.example.PizzaShop.controllers;
 
-import com.example.PizzaShop.models.CustomerOrder;
 import com.example.PizzaShop.models.Employee;
-import com.example.PizzaShop.models.Product;
 import com.example.PizzaShop.repository.EmployeeRepo;
-import com.example.PizzaShop.repository.ProductRepo;
-import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +20,7 @@ public class EmployeeController {
     public List<Employee> findAll() {
         return employeeRepo.findAll();
     }
+
     @GetMapping("/employee/{id}")
     public Employee findEmployeeById(@PathVariable Long id) {
         return employeeRepo.findEmployeeByID(id);
@@ -32,28 +28,28 @@ public class EmployeeController {
 
     @Transactional
     @PostMapping("/employee")
-    public void addEmployee(@Valid @RequestBody Employee employee){
-        employeeRepo.saveEmployee(employeeRepo.getLargestID()+1, employee.getEmployee_name(),employee.getEmployment_status(),employee.getPassword());
+    public void addEmployee(@Valid @RequestBody Employee employee) {
+        employeeRepo.saveEmployee(employeeRepo.getLargestID() + 1, employee.getEmployee_name(), employee.getEmployment_status(), employee.getPassword());
     }
 
     @Transactional
     @DeleteMapping("/employee/{id}")
-    public void deleteEmployee(@PathVariable Long id){
+    public void deleteEmployee(@PathVariable Long id) {
         employeeRepo.deleteEmployeeById(id);
     }
 
     @Transactional
     @PutMapping("/employee/{id}")
-    public void updateEmployee(@PathVariable Long id, @Valid @RequestBody Employee employee){
+    public void updateEmployee(@PathVariable Long id, @Valid @RequestBody Employee employee) {
         Employee e = employeeRepo.findEmployeeByID(id);
 
-        if(employee.getEmployment_status()!=0){
+        if (employee.getEmployment_status() != 0) {
             e.setEmployment_status(employee.getEmployment_status());
         }
-        if(Objects.nonNull(employee.getEmployee_name()) && !(employee.getEmployee_name().isEmpty())){
+        if (Objects.nonNull(employee.getEmployee_name()) && !(employee.getEmployee_name().isEmpty())) {
             e.setEmployee_name(employee.getEmployee_name());
         }
-        if(Objects.nonNull(employee.getPassword()) && !(employee.getPassword().isEmpty())){
+        if (Objects.nonNull(employee.getPassword()) && !(employee.getPassword().isEmpty())) {
             e.setPassword(employee.getPassword());
         }
         employeeRepo.save(e);

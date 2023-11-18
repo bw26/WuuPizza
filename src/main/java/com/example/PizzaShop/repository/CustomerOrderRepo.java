@@ -1,8 +1,6 @@
 package com.example.PizzaShop.repository;
 
-import com.example.PizzaShop.models.Customer;
 import com.example.PizzaShop.models.CustomerOrder;
-import com.example.PizzaShop.models.OrderItems;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,13 +12,14 @@ import java.sql.Time;
 import java.util.List;
 
 @Repository
-public interface CustomerOrderRepo extends CrudRepository<CustomerOrder,Long> {
+public interface CustomerOrderRepo extends CrudRepository<CustomerOrder, Long> {
 
-    @Query(value = "SELECT * FROM CUSTOMERORDER WHERE ORDER_ID = ?",nativeQuery = true)
+    @Query(value = "SELECT * FROM CUSTOMERORDER WHERE ORDER_ID = ?", nativeQuery = true)
     CustomerOrder findCustomerOrderById(Long id);
 
-    @Query(value = "SELECT * FROM CUSTOMERORDER",nativeQuery = true)
+    @Query(value = "SELECT * FROM CUSTOMERORDER", nativeQuery = true)
     List<CustomerOrder> findAll();
+
     @Query(value = "SELECT ZEROIFNULL(MAX(ORDER_ID)) FROM CUSTOMERORDER", nativeQuery = true)
     int getLargestID();
 

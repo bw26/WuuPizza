@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CustomerRepo extends CrudRepository<Customer,Long> {
+public interface CustomerRepo extends CrudRepository<Customer, Long> {
 
-    @Query(value = "SELECT * FROM CUSTOMER WHERE PHONE_NUMBER = ?",nativeQuery = true)
+    @Query(value = "SELECT * FROM CUSTOMER WHERE PHONE_NUMBER = ?", nativeQuery = true)
     Customer findCustomerByNumber(Long id);
 
-    @Query(value = "SELECT * FROM CUSTOMER",nativeQuery = true)
+    @Query(value = "SELECT * FROM CUSTOMER", nativeQuery = true)
     List<Customer> findAll();
 
 

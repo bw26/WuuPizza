@@ -4,35 +4,57 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ORDER_ITEMS")
-@IdClass(OrderItems.class)
 public class OrderItems {
+    @EmbeddedId
+    private OrderProductKey orderProductKey;
+    @ManyToOne
+    @MapsId("order_id")
+    @JoinColumn(name = "order_id")
+    private CustomerOrder customerOrder;
+
+    @ManyToOne
+    @MapsId("product_id")
+    @JoinColumn(name = "product_id")
+    private Product product;
     @Column(name = "QUANTITY")
-    @Id
     private int quantity;
 
-    @Column(name = "ORDER_ID")
-    @Id
-    private int order_id;
-    @Column(name = "PRODUCT_ID")
-    @Id
-    private int product_id;
 
-    public OrderItems(){super();}
-    public OrderItems(int order_id, int product_id, int quantity){
-        this.order_id=order_id;
-        this.product_id=product_id;
-        this.quantity=quantity;
+    public OrderItems() {
+        super();
     }
 
-    public int getOrder_id() {
-        return this.order_id;
+    public OrderItems(OrderProductKey key, int quantity, CustomerOrder customerOrder, Product product) {
+        super();
+        this.orderProductKey = key;
+        this.quantity = quantity;
+        this.customerOrder = customerOrder;
+        this.product = product;
     }
 
-    public int getProduct_id() {
-        return this.product_id;
-    }
-
+    //Getter
     public int getQuantity() {
         return this.quantity;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    //Setter
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setOrderProductKey(OrderProductKey orderProductKey) {
+        this.orderProductKey = orderProductKey;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setCustomerOrder(CustomerOrder customerOrder) {
+        this.customerOrder = customerOrder;
     }
 }

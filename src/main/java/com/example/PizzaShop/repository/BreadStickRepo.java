@@ -14,7 +14,7 @@ public interface BreadStickRepo extends CrudRepository<BreadStick, Long> {
     @Query(value = "SELECT * FROM BREADSTICK WHERE PRODUCT_ID = ?", nativeQuery = true)
     BreadStick findBreadByID(Long id);
 
-    @Query(value = "SELECT * FROM BREADSTICK",nativeQuery = true)
+    @Query(value = "SELECT * FROM BREADSTICK", nativeQuery = true)
     List<BreadStick> findAll();
 
     @Query(value = "select ZEROIFNULL(MAX(PRODUCT_ID)) FROM PRODUCT", nativeQuery = true)
@@ -31,6 +31,7 @@ public interface BreadStickRepo extends CrudRepository<BreadStick, Long> {
     @Modifying
     @Query(value = "DELETE FROM BREADSTICK WHERE PRODUCT_ID = ?", nativeQuery = true)
     void deleteBreadStickById(Long id);
+
     @Modifying
     @Query(value = "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?", nativeQuery = true)
     void deleteFromProduct(Long id);

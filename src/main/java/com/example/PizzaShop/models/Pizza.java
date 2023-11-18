@@ -1,7 +1,6 @@
 package com.example.PizzaShop.models;
 
 import jakarta.persistence.*;
-import net.snowflake.client.jdbc.internal.apache.tika.config.Field;
 
 @Entity
 @Table(name = "PIZZA")
@@ -17,24 +16,44 @@ public class Pizza {
     private double price;
 
     @OneToOne
-    @JoinColumn(name = "product_id",referencedColumnName = "PRODUCT_ID")
+    @JoinColumn(name = "product_id", referencedColumnName = "PRODUCT_ID")
     private Product product;
 
-    public Pizza(){super();}
-    public Pizza(int product_id, String type, int size, double price){
+    public Pizza() {
+        super();
+    }
+
+    public Pizza(int product_id, String type, int size, double price, Product product) {
         super();
         this.product_id = product_id;
-        this.type=type;
-        this.size=size;
-        this.price=price;
+        this.type = type;
+        this.size = size;
+        this.price = price;
+        this.product = product;
     }
-    //Getters
-    public int getId(){return this.product_id;}
-    public String getType(){return this.type;}
-    public int getSize(){return this.size;}
-    public double getPrice(){return this.price;}
-    public Product getProduct(){return this.product;}
 
+    //Getters
+    public int getId() {
+        return this.product_id;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public int getSize() {
+        return this.size;
+    }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public Product getProduct() {
+        return this.product;
+    }
+
+    //Setter
     public void setPrice(double price) {
         this.price = price;
     }

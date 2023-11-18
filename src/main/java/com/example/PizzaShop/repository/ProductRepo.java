@@ -12,6 +12,6 @@ public interface ProductRepo extends CrudRepository<Product, Long> {
     @Query(value = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = ?", nativeQuery = true)
     Product findProductByID(Long id);
 
-    @Query(value = "SELECT * FROM PRODUCT",nativeQuery = true)
+    @Query(value = "SELECT * FROM PRODUCT", nativeQuery = true)
     List<Product> findAll();
 }
