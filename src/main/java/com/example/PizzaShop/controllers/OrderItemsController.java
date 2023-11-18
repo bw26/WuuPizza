@@ -20,7 +20,7 @@ public class OrderItemsController {
     }
 
     @GetMapping("/orders/{id}/items")
-    public OrderItems findOrderItemsById(@PathVariable Long id) {
+    public List<OrderItems> findOrderItemsById(@PathVariable Long id) {
         return orderItemsRepoRepo.findOrderItemsByID(id);
     }
 

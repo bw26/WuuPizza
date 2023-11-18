@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderItemsRepo extends CrudRepository<OrderItems, Long> {
 
     @Query(value = "SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = ?", nativeQuery = true)
-    OrderItems findOrderItemsByID(Long id);
+    List<OrderItems> findOrderItemsByID(Long id);
 
     @Query(value = "SELECT * FROM ORDER_ITEMS", nativeQuery = true)
     List<OrderItems> findAll();
