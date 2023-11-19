@@ -25,6 +25,16 @@ public class CustomerOrder {
     @Column(name = "STATUS")
     private int status;
 
+    @ManyToOne
+    @MapsId("phone_number")
+    @JoinColumn(name = "phone_number")
+    private Customer customer;
+
+    @ManyToOne
+    @MapsId("employee_id")
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     @OneToOne(mappedBy = "customerOrder")
     private OrderDetails orderDetails;
 
@@ -35,13 +45,16 @@ public class CustomerOrder {
         super();
     }
 
-    public CustomerOrder(int order_id, int employee_id, Long phone_number, Date date, Time time, int status, OrderDetails orderDetails, List<OrderItems> orderItems) {
+    public CustomerOrder(int order_id, int employee_id, Long phone_number, Date date, Time time, int status, Customer customer, Employee employee, OrderDetails orderDetails, List<OrderItems> orderItems) {
+        super();
         this.order_id = order_id;
         this.employee_id = employee_id;
         this.phone_number = phone_number;
         this.date = date;
         this.time = time;
         this.status = status;
+        this.customer = customer;
+        this.employee = employee;
         this.orderDetails = orderDetails;
         this.orderItems = orderItems;
     }

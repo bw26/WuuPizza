@@ -19,21 +19,21 @@ public class Customer {
     @Column(name = "CITY")
     private String city;
 
-    @ManyToMany
-    @JoinTable(name = "CUSTOMERORDER", joinColumns = @JoinColumn(name = "phone_number"), inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private List<Employee> employees;
+    @OneToMany(mappedBy = "customer")
+    private List<CustomerOrder> customerOrders;
 
     public Customer() {
         super();
     }
 
-    public Customer(Long phone_number, String street_address, int zip_code, String state, String city, List<Employee> employees) {
+    public Customer(Long phone_number, String street_address, int zip_code, String state, String city, List<CustomerOrder> customerOrders) {
+        super();
         this.phone_number = phone_number;
         this.street_address = street_address;
         this.zip_code = zip_code;
         this.state = state;
         this.city = city;
-        this.employees = employees;
+        this.customerOrders = customerOrders;
     }
 
     //Getters
@@ -57,6 +57,10 @@ public class Customer {
         return this.city;
     }
 
+//    public List<CustomerOrder> getCustomerOrders() {
+//        return customerOrders;
+//    }
+
     //Setter
     public void setStreet_address(String street_address) {
         this.street_address = street_address;
@@ -72,10 +76,6 @@ public class Customer {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 
     public void setPhone_number(Long phone_number) {

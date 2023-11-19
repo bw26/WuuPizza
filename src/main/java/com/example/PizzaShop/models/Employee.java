@@ -17,21 +17,21 @@ public class Employee {
     private String employee_name;
     @Column(name = "PASSWORD")
     private String password;
-    @ManyToMany
-    @JoinTable(name = "CUSTOMERORDER", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "phone_number"))
-    private List<Customer> customers;
+
+    @OneToMany(mappedBy = "employee")
+    private List<CustomerOrder> customerOrders;
 
     public Employee() {
         super();
     }
 
-    public Employee(int employee_id, int employment_status, String employee_name, String password, List<Customer> customers) {
+    public Employee(int employee_id, int employment_status, String employee_name, String password, List<CustomerOrder> customers) {
         super();
         this.employee_id = employee_id;
         this.employment_status = employment_status;
         this.employee_name = employee_name;
         this.password = password;
-        this.customers = customers;
+        this.customerOrders = customers;
     }
 
     //Getters
@@ -49,6 +49,10 @@ public class Employee {
 
     public String getPassword() {
         return this.password;
+    }
+
+    public List<CustomerOrder> getCustomerOrders() {
+        return customerOrders;
     }
 
     //Setters
