@@ -1,5 +1,6 @@
 package com.example.PizzaShop.controllers;
 
+import com.example.PizzaShop.models.CustomerOrder;
 import com.example.PizzaShop.models.Employee;
 import com.example.PizzaShop.repository.EmployeeRepo;
 import jakarta.transaction.Transactional;
@@ -24,6 +25,14 @@ public class EmployeeController {
     @GetMapping("/employee/{id}")
     public Employee findEmployeeById(@PathVariable Long id) {
         return employeeRepo.findEmployeeByID(id);
+    }
+
+    @GetMapping("/employee/{id}/orders")
+    public List<CustomerOrder> findEmployeeOrder(@PathVariable Long id, @RequestParam(required = false) boolean byWeek) {
+        if(byWeek){
+            return employeeRepo.getEmployeeOrderByWeek(id);
+        }
+        return employeeRepo.findEmployeeByID(id).getCustomerOrders();
     }
 
     @Transactional

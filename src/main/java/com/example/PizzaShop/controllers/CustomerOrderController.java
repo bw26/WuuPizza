@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,13 @@ public class CustomerOrderController {
     private CustomerOrderRepo customerOrderRepo;
 
     @GetMapping("/orders")
-    public List<CustomerOrder> findAll() {
+    public List<CustomerOrder> findAll(@RequestParam(required = false) Long zip, @RequestParam(required = false)boolean byWeek) {
+        if (zip != null){
+            if (byWeek){
+                return customerOrderRepo.findOrderByZipByWeek(zip);
+            }
+            return customerOrderRepo.findOrderByZip(zip);
+        }
         return customerOrderRepo.findAll();
     }
 

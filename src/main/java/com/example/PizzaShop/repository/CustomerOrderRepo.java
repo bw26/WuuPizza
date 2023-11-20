@@ -23,6 +23,12 @@ public interface CustomerOrderRepo extends CrudRepository<CustomerOrder, Long> {
     @Query(value = "SELECT ZEROIFNULL(MAX(ORDER_ID)) FROM CUSTOMERORDER", nativeQuery = true)
     int getLargestID();
 
+    @Query(value = "SELECT o.ORDER_ID, o.EMPLOYEE_ID, o.PHONE_NUMBER, o.DATE, o.TIME, o.STATUS FROM CUSTOMERORDER o INNER JOIN CUSTOMER c ON o.PHONE_NUMBER = c.PHONE_NUMBER WHERE ZIP_CODE = ?", nativeQuery = true)
+    List<CustomerOrder> findOrderByZip(Long zip);
+
+    @Query(value = "SELECT o.ORDER_ID, o.EMPLOYEE_ID, o.PHONE_NUMBER, o.DATE, o.TIME, o.STATUS FROM CUSTOMERORDER o INNER JOIN CUSTOMER c ON o.PHONE_NUMBER = c.PHONE_NUMBER WHERE ZIP_CODE = :ZIP_CODE AND CURRENT_DATE() - o.DATE <= 7 AND WEEK(o.DATE)= WEEK(CURRENT_DATE())", nativeQuery = true)
+    List<CustomerOrder> findOrderByZipByWeek(@Param("ZIP_CODE")Long zip);
+
     @Modifying
     @Query(value = "INSERT INTO ORDER_ITEMS(ORDER_ID, PRODUCT_ID, QUANTITY) VALUES(:ORDER_ID, :PRODUCT_ID, :QUANTITY)", nativeQuery = true)
     void addOrderItems(@Param("ORDER_ID") int order_id, @Param("PRODUCT_ID") int product_id, @Param("QUANTITY") int quantity);
